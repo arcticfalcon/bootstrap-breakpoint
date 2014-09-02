@@ -15,12 +15,10 @@ Add **only** to break cascading upwards.
   color: black;
   
   .break(sm only, {
-  // min-width and max-width
     color: red;
   });
 
   .break(md, {
-  // just min-width 
     color: blue;
   });
 
@@ -29,8 +27,35 @@ Add **only** to break cascading upwards.
 .my-other-class
 {
   .break(sm only lg, {
-  // not xs or md!
     color: white;
   });
+}
+```
+
+outputs:
+
+```
+.my-class {
+  color: black;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .my-class {
+    color: red;
+  }
+}
+@media (min-width: 992px) {
+  .my-class {
+    color: blue;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .my-other-class {
+    color: white;
+  }
+}
+@media (min-width: 1200px) {
+  .my-other-class {
+    color: white;
+  }
 }
 ```
